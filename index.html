@@ -268,7 +268,7 @@
                 <!-- 【ステップ1】数字入力テンキー（計算用） -->
                 <div id="math-input-panel" class="space-y-3">
                     <div class="flex items-center justify-between bg-black/40 px-3 py-2 rounded-lg border border-purple-500/30">
-                        <span class="text-xs text-purple-300">計算結果を入力:</span>
+                        <span id="math-input-label" class="text-xs text-purple-300">計算結果を入力:</span>
                         <div id="num-input-display" class="w-24 h-9 bg-black/70 rounded-lg border border-yellow-500/50 flex items-center justify-center font-mono text-xl text-yellow-400 font-bold tracking-widest shadow-inner">
                             -
                         </div>
@@ -303,7 +303,7 @@
                 <div id="kana-input-panel" class="hidden space-y-3">
                     <div class="flex items-center justify-between bg-amber-950/60 border border-yellow-500/40 p-2.5 rounded-xl">
                         <div class="text-xs text-yellow-200">
-                            導き出した数: <span id="solved-num-display" class="font-mono text-lg font-bold text-yellow-400">27</span>
+                            <span id="solved-num-label">暗号の数</span>: <span id="solved-num-display" class="font-mono text-lg font-bold text-yellow-400">27</span>
                         </div>
                         <button onclick="app.openTableModal()" class="px-2.5 py-1 rounded bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 text-xs border border-yellow-500/40 flex items-center space-x-1">
                             <i class="fa-solid fa-book-open"></i> <span>暗号表を見る</span>
@@ -490,12 +490,12 @@
                 phantomMsg: "「フフフ…美術館のどこかにお宝を隠した。最初の暗号を解いてみろ！」",
                 hint: "『と』は 3×9 の計算の答え（27）だぞ！",
                 items: [
-                    { expr: "3 × 9", ans: 27, char: "と", fillBlank: false },
-                    { expr: "3 × 3", ans: 9,  char: "け", fillBlank: false },
-                    { expr: "1 × 2", ans: 2,  char: "い", fillBlank: false },
-                    { expr: "6 × 6", ans: 36, char: "の", fillBlank: false },
-                    { expr: "4 × 7", ans: 28, char: "な", fillBlank: false },
-                    { expr: "2 × 3", ans: 6,  char: "か", fillBlank: false }
+                    { expr: "3 × 9", mathAns: 27, cipherNum: 27, char: "と", fillBlank: false },
+                    { expr: "3 × 3", mathAns: 9,  cipherNum: 9,  char: "け", fillBlank: false },
+                    { expr: "1 × 2", mathAns: 2,  cipherNum: 2,  char: "い", fillBlank: false },
+                    { expr: "6 × 6", mathAns: 36, cipherNum: 36, char: "の", fillBlank: false },
+                    { expr: "4 × 7", mathAns: 28, cipherNum: 28, char: "な", fillBlank: false },
+                    { expr: "2 × 3", mathAns: 6,  cipherNum: 6,  char: "か", fillBlank: false }
                 ]
             },
             {
@@ -503,16 +503,17 @@
                 title: "第二章：屋敷の隠し扉",
                 treasure: "ルビーの指輪",
                 icon: "fa-gem",
-                targetWord: "ひみつのへや",
+                targetWord: "ひみつのたから",
                 phantomMsg: "「ふはは！九九の計算が得意なようだな。ではこの暗号はどうだ？」",
                 hint: "『ひ』は 6×7 の答え（42）だ！暗号対応表で探そう。",
                 items: [
-                    { expr: "6 × 7", ans: 42, char: "ひ", fillBlank: false },
-                    { expr: "7 × 8", ans: 56, char: "み", fillBlank: false },
-                    { expr: "3 × 8", ans: 24, char: "つ", fillBlank: false },
-                    { expr: "4 × 9", ans: 36, char: "の", fillBlank: false },
-                    { expr: "6 × 8", ans: 48, char: "へ", fillBlank: false },
-                    { expr: "9 × 9", ans: 81, char: "り", fillBlank: false }
+                    { expr: "6 × 7", mathAns: 42, cipherNum: 42, char: "ひ", fillBlank: false },
+                    { expr: "7 × 8", mathAns: 56, cipherNum: 56, char: "み", fillBlank: false },
+                    { expr: "3 × 8", mathAns: 24, cipherNum: 24, char: "つ", fillBlank: false },
+                    { expr: "4 × 9", mathAns: 36, cipherNum: 36, char: "の", fillBlank: false },
+                    { expr: "4 × 5", mathAns: 20, cipherNum: 20, char: "た", fillBlank: false },
+                    { expr: "2 × 3", mathAns: 6,  cipherNum: 6,  char: "か", fillBlank: false },
+                    { expr: "8 × 9", mathAns: 72, cipherNum: 72, char: "ら", fillBlank: false }
                 ]
             },
             {
@@ -520,17 +521,16 @@
                 title: "第三章：書斎の棚",
                 treasure: "古文書の羊皮紙",
                 icon: "fa-book-bookmark",
-                targetWord: "ほんだなのうら",
-                phantomMsg: "「なかなかやるな。本棚のうしろに眠る秘密を暴いてみるがいい！」",
-                hint: "『ほ』は 7×7 の答え（49）、『う』は 1×3 の答え（3）だ。",
+                targetWord: "ほしのありか",
+                phantomMsg: "「なかなかやるな。星の輝く場所に眠る秘密を暴いてみるがいい！」",
+                hint: "『ほ』は 7×7 の答え（49）、『あ』は 1×1 の答え（1）だ。",
                 items: [
-                    { expr: "7 × 7", ans: 49, char: "ほ", fillBlank: false },
-                    { expr: "5 × 9", ans: 45, char: "ふ", fillBlank: false }, // ふ/ん
-                    { expr: "4 × 5", ans: 20, char: "た", fillBlank: false },
-                    { expr: "7 × 4", ans: 28, char: "な", fillBlank: false },
-                    { expr: "9 × 4", ans: 36, char: "の", fillBlank: false },
-                    { expr: "1 × 3", ans: 3,  char: "う", fillBlank: false },
-                    { expr: "8 × 9", ans: 72, char: "ら", fillBlank: false }
+                    { expr: "7 × 7", mathAns: 49, cipherNum: 49, char: "ほ", fillBlank: false },
+                    { expr: "2 × 7", mathAns: 14, cipherNum: 14, char: "し", fillBlank: false },
+                    { expr: "6 × 6", mathAns: 36, cipherNum: 36, char: "の", fillBlank: false },
+                    { expr: "1 × 1", mathAns: 1,  cipherNum: 1,  char: "あ", fillBlank: false },
+                    { expr: "9 × 9", mathAns: 81, cipherNum: 81, char: "り", fillBlank: false },
+                    { expr: "1 × 6", mathAns: 6,  cipherNum: 6,  char: "か", fillBlank: false }
                 ]
             },
             {
@@ -539,16 +539,16 @@
                 treasure: "サファイアの王冠",
                 icon: "fa-crown",
                 targetWord: "たからのありか",
-                phantomMsg: "「ここからは虫食い暗号（?×○）だ！ ?に入る数字を計算して暗号を解け！」",
-                hint: "『? × 5 = 20』なら、? は 4 だ！計算結果の 20 は『た』を表すぞ！",
+                phantomMsg: "「虫食い暗号だ！『？』に入る数を計算して『暗号の数』を突き止め、暗号表から解読するのだ！」",
+                hint: "『? × 5 = 20』なら ? は 4！正解すると暗号の数『20』があらわれ、『た』が導き出せるぞ！",
                 items: [
-                    { expr: "? × 5 = 20", ans: 4, char: "た", fillBlank: true, blankPos: 1 },
-                    { expr: "2 × ? = 6",  ans: 3, char: "か", fillBlank: true, blankPos: 2 },
-                    { expr: "? × 9 = 72", ans: 8, char: "ら", fillBlank: true, blankPos: 1 },
-                    { expr: "6 × ? = 36", ans: 6, char: "の", fillBlank: true, blankPos: 2 },
-                    { expr: "1 × ? = 1",  ans: 1, char: "あ", fillBlank: true, blankPos: 2 },
-                    { expr: "? × 7 = 42", ans: 6, char: "り", fillBlank: true, blankPos: 1 },
-                    { expr: "1 × ? = 6",  ans: 6, char: "か", fillBlank: true, blankPos: 2 }
+                    { expr: "? × 5 = 20", mathAns: 4, cipherNum: 20, char: "た", fillBlank: true, blankPos: 1 },
+                    { expr: "? × 3 = 6",  mathAns: 2, cipherNum: 6,  char: "か", fillBlank: true, blankPos: 1 },
+                    { expr: "? × 9 = 72", mathAns: 8, cipherNum: 72, char: "ら", fillBlank: true, blankPos: 1 },
+                    { expr: "6 × ? = 36", mathAns: 6, cipherNum: 36, char: "の", fillBlank: true, blankPos: 2 },
+                    { expr: "1 × ? = 1",  mathAns: 1, cipherNum: 1,  char: "あ", fillBlank: true, blankPos: 2 },
+                    { expr: "? × 9 = 81", mathAns: 9, cipherNum: 81, char: "り", fillBlank: true, blankPos: 1 },
+                    { expr: "1 × ? = 6",  mathAns: 6, cipherNum: 6,  char: "か", fillBlank: true, blankPos: 2 }
                 ]
             },
             {
@@ -557,17 +557,16 @@
                 treasure: "怪盗のダイヤモンド鍵",
                 icon: "fa-key",
                 targetWord: "みらいのきみへ",
-                phantomMsg: "「見事最終ステージに到達したな探偵諸君！最後の挑戦状を解いてみよ！」",
-                hint: "かけ算の九九をフル活用せよ！『み』は7×8=56だ！",
+                phantomMsg: "「見事最終ステージに到達したな！九九の計算と虫食い問題、全知識で最後の暗号を解け！」",
+                hint: "『? × 9 = 72』なら ? は 8！解読する暗号の数は『72』➔『ら』だ！",
                 items: [
-                    { expr: "7 × 8", ans: 56, char: "み", fillBlank: false },
-                    { expr: "? × 7 = 42", ans: 6, char: "り", fillBlank: true, blankPos: 1 },
-                    { expr: "1 × 1", ans: 1,  char: "あ", fillBlank: false },
-                    { expr: "1 × 2", ans: 2,  char: "い", fillBlank: false },
-                    { expr: "4 × 9", ans: 36, char: "の", fillBlank: false },
-                    { expr: "1 × 7", ans: 7,  char: "き", fillBlank: false },
-                    { expr: "8 × 7", ans: 56, char: "み", fillBlank: false },
-                    { expr: "2 × 2", ans: 4,  char: "え", fillBlank: false }
+                    { expr: "7 × 8", mathAns: 56, cipherNum: 56, char: "み", fillBlank: false },
+                    { expr: "? × 9 = 72", mathAns: 8, cipherNum: 72, char: "ら", fillBlank: true, blankPos: 1 },
+                    { expr: "1 × 2", mathAns: 2,  cipherNum: 2,  char: "い", fillBlank: false },
+                    { expr: "6 × ? = 36", mathAns: 6, cipherNum: 36, char: "の", fillBlank: true, blankPos: 2 },
+                    { expr: "1 × 7", mathAns: 7,  cipherNum: 7,  char: "き", fillBlank: false },
+                    { expr: "8 × 7", mathAns: 56, cipherNum: 56, char: "み", fillBlank: false },
+                    { expr: "? × 8 = 48", mathAns: 6, cipherNum: 48, char: "へ", fillBlank: true, blankPos: 1 }
                 ]
             }
         ];
@@ -698,9 +697,9 @@
                         const blankPos = Math.random() > 0.5 ? 1 : 2;
                         const exprStr = blankPos === 1 ? `? × ${b} = ${mapped.num}` : `${a} × ? = ${mapped.num}`;
                         const ansVal = blankPos === 1 ? a : b;
-                        return { expr: exprStr, ans: ansVal, char: mapped.kana, fillBlank: true, blankPos: blankPos };
+                        return { expr: exprStr, mathAns: ansVal, cipherNum: mapped.num, char: mapped.kana, fillBlank: true, blankPos: blankPos };
                     } else {
-                        return { expr: `${a} × ${b}`, ans: mapped.num, char: mapped.kana, fillBlank: false };
+                        return { expr: `${a} × ${b}`, mathAns: mapped.num, cipherNum: mapped.num, char: mapped.kana, fillBlank: false };
                     }
                 });
 
@@ -870,8 +869,9 @@
                         front.innerHTML = `
                             <div class="text-[10px] text-yellow-300 tracking-tighter">暗号 ${idx + 1}</div>
                             <div class="text-center my-auto">
-                                <div class="text-xs text-purple-300 font-mono line-through opacity-70">${item.expr}</div>
-                                <div class="text-xl sm:text-2xl font-bold font-mono text-yellow-400">${item.ans} ➔ ?</div>
+                                <div class="text-[10px] text-purple-300 font-mono opacity-80">${item.expr}</div>
+                                <div class="text-[10px] text-yellow-200/90 font-bold mt-0.5">暗号の数</div>
+                                <div class="text-xl sm:text-2xl font-bold font-mono text-yellow-400">${item.cipherNum}</div>
                             </div>
                             <div class="w-full text-center py-0.5 bg-yellow-500/20 rounded text-[10px] text-yellow-300 font-bold">
                                 かな解読へ
@@ -906,7 +906,7 @@
                             ${item.char}
                         </div>
                         <div class="text-[10px] font-mono text-amber-800">
-                            =${item.ans}
+                            =${item.cipherNum}
                         </div>
                     `;
 
@@ -938,11 +938,21 @@
 
                 if (!item) return;
 
+                const mathInputLabel = document.getElementById('math-input-label');
+                const solvedNumLabel = document.getElementById('solved-num-label');
+
                 if (!item.mathSolved) {
                     // ステップ1: 数式計算モード
                     mathPanel.classList.remove('hidden');
                     kanaPanel.classList.add('hidden');
-                    stepBadge.innerText = "ステップ1: 九九の計算";
+
+                    if (item.fillBlank) {
+                        stepBadge.innerText = "ステップ1: 「？」に入る数を入力";
+                        if (mathInputLabel) mathInputLabel.innerText = "「？」に入る数を入力:";
+                    } else {
+                        stepBadge.innerText = "ステップ1: 九九の計算";
+                        if (mathInputLabel) mathInputLabel.innerText = "計算結果を入力:";
+                    }
                     stepBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-500/20 text-yellow-300 border border-yellow-500/40";
                 } else if (!item.kanaSolved) {
                     // ステップ2: ひらがな暗号解読モード
@@ -950,14 +960,22 @@
                     kanaPanel.classList.remove('hidden');
                     stepBadge.innerText = "ステップ2: 暗号解読";
                     stepBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/30 text-amber-300 border border-amber-400";
-                    document.getElementById('solved-num-display').innerText = item.ans;
+                    
+                    if (solvedNumLabel) {
+                        solvedNumLabel.innerText = item.fillBlank ? "解読する暗号の数" : "導き出した数";
+                    }
+                    document.getElementById('solved-num-display').innerText = item.cipherNum;
                 } else {
                     // 解読完了済み
                     mathPanel.classList.add('hidden');
                     kanaPanel.classList.remove('hidden');
                     stepBadge.innerText = "解読完了！";
                     stepBadge.className = "px-2.5 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-300 border border-green-500/40";
-                    document.getElementById('solved-num-display').innerText = `${item.ans} (『${item.char}』)`;
+                    
+                    if (solvedNumLabel) {
+                        solvedNumLabel.innerText = "暗号の数";
+                    }
+                    document.getElementById('solved-num-display').innerText = `${item.cipherNum} (『${item.char}』)`;
                 }
             }
 
@@ -995,7 +1013,7 @@
                 const currentItem = this.activeStage.items[this.currentSlotIndex];
                 const userNum = parseInt(this.inputVal);
 
-                if (userNum === currentItem.ans) {
+                if (userNum === currentItem.mathAns) {
                     // 計算正解！
                     this.playSound('correct');
                     currentItem.mathSolved = true;
@@ -1009,6 +1027,37 @@
                     this.showDialog("計算ミス", "数式の計算結果が違います。もう一度計算してみよう！", "fa-calculator");
                     this.inputVal = "";
                     this.updateInputDisplay();
+                }
+            }
+
+            // ステップ2: 手動ひらがな暗号解読処理
+            submitKanaAnswer(selectedKana) {
+                const currentItem = this.activeStage.items[this.currentSlotIndex];
+                if (!currentItem || !currentItem.mathSolved) return;
+
+                if (selectedKana === currentItem.char) {
+                    // ひらがな解読正解！
+                    this.playSound('correct');
+                    currentItem.kanaSolved = true;
+                    this.renderCipherSlots();
+
+                    // 自動的に次の未完了スロットへ移動
+                    let nextIdx = this.activeStage.items.findIndex(it => !it.kanaSolved);
+                    if (nextIdx !== -1) {
+                        this.currentSlotIndex = nextIdx;
+                    }
+
+                    this.renderCipherSlots();
+                    this.updateInputPanel();
+
+                    // すべて解読完了チェック
+                    if (this.activeStage.items.every(it => it.kanaSolved)) {
+                        setTimeout(() => this.handleStageClear(), 600);
+                    }
+                } else {
+                    // 不正解
+                    this.playSound('wrong');
+                    this.showDialog("解読エラー", `「${selectedKana}」ではありません。暗号解読表で『${currentItem.cipherNum}』に対応するひらがなを確認してみよう！`, "fa-magnifying-glass");
                 }
             }
 
